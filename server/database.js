@@ -1,8 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-// На Render постоянные данные хранятся в /data (примонтированный диск).
-// Локально — в корне папки server.
+// На Railway файловая система постоянна между деплоями.
+// На Render нужен примонтированный диск (/data).
+// DB_PATH можно задать через env-переменную, по умолчанию — папка сервера.
 const dbDir = process.env.DB_PATH || __dirname;
 const dbPath = path.resolve(dbDir, 'deep.sqlite');
 
