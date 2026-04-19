@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: deep-messenger
+    env: node
+    region: frankfurt
+    plan: free
+
+    # Render автоматически запустит build, затем start
+    buildCommand: npm run build
+    startCommand: npm start
+
+    # Render сохраняет диск — SQLite-файл не исчезнет при перезапуске
+    disk:
+      name: deep-data
+      mountPath: /data
+      sizeGB: 1
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true        # Render сам сгенерирует случайную строку
+      - key: DB_PATH
+        value: /data
+      - key: ADMIN_CODE
+        sync: false                # Вводится вручную в Dashboard -> Environment
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_EMAIL
+        sync: false

@@ -1,0 +1,12 @@
+{
+  "name": "deep-messenger",
+  "version": "1.0.0",
+  "description": "Сверхзащищённый автономный E2EE веб-мессенджер",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev:server": "node server/index.js",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm install && npm run build && node -e \"const fs=require('fs'); if(!fs.existsSync('server/public')) fs.mkdirSync('server/public',{recursive:true}); fs.cpSync('client/dist', 'server/public', {recursive:true}); console.log('[BUILD] Клиент скопирован в server/public');\"",
+    "postinstall": "cd server && npm install"
+  }
+}
