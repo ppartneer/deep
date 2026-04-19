@@ -39,6 +39,11 @@ app.use('/api/admin', adminRoutes);
 // Optional: Serve statically
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  if (req.path === '/health') return res.sendStatus(200);
+  next();
+});
+
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
